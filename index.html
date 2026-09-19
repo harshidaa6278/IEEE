@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>c3 girls— Portfolio</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <!-- style.css is a SEPARATE file — kept unlinked as requested -->
+  <!-- To apply it, add:  <link rel="stylesheet" href="style.css" />  here -->
+
+  <style>
+    /* Copied from style.css so the page works standalone */
+    .delay-1 { animation-delay: 0.05s }
+    .delay-2 { animation-delay: 0.15s }
+    .delay-3 { animation-delay: 0.25s }
+    .delay-4 { animation-delay: 0.40s }
+    .delay-5 { animation-delay: 0.55s }
+    html { scroll-behavior: smooth; }
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -2px;
+      width: 0; height: 1px;
+      background: #c84b2f;
+      transition: width 0.25s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+    .project-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(14,14,14,0.10);
+    }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* Photo upload area */
+    #photo-wrapper { cursor: pointer; }
+    #photo-wrapper:hover #photo-overlay { opacity: 1; }
+  </style>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Instrument Serif"', 'Georgia', 'serif'],
+            sans:  ['"DM Sans"', 'sans-serif'],
+          },
+          colors: {
+            ink:    '#0e0e0e',
+            paper:  '#f5f2eb',
+            muted:  '#7a7870',
+            accent: '#c84b2f',
+            card:   '#edeae2',
+          },
+          animation: { 'fade-up': 'fadeUp 0.6s ease both' },
+          keyframes: {
+            fadeUp: {
+              '0%':   { opacity: '0', transform: 'translateY(18px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+          },
+        },
+      },
+    }
+  </script>
+</head>
+
+<body class="bg-paper text-ink font-sans antialiased">
+
+  <!-- ===================== NAV ===================== -->
+  <header class="fixed top-0 inset-x-0 z-50 bg-paper/80 backdrop-blur-sm border-b border-ink/10">
+    <div class="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
+
+      <!-- CHANGE: Your initials -->
+      <span class="font-serif text-lg tracking-tight">HU</span>
+
+      <nav class="flex gap-7 text-sm text-muted font-medium">
+        <a href="#about"    class="nav-link hover:text-ink transition-colors">About</a>
+        <a href="#projects" class="nav-link hover:text-ink transition-colors">Projects</a>
+        <a href="#contact"  class="nav-link hover:text-ink transition-colors">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- ===================== HERO ===================== -->
+  <section id="hero" class="min-h-screen flex flex-col justify-center px-6 pt-20 pb-16 max-w-5xl mx-auto">
+
+    <div class="animate-fade-up delay-1 w-10 h-px bg-accent mb-10"></div>
+
+    <!-- CHANGE: Your name -->
+    <h1 class="animate-fade-up delay-2 font-serif text-[clamp(3rem,10vw,7rem)] leading-[0.95] tracking-tight mb-8">
+      HARSHIDAA<br/>
+      <em class="not-italic text-muted">Name</em><span class="text-accent">.</span>
+    </h1>
+
+    <!-- CHANGE: Your tagline -->
+    <p class="animate-fade-up delay-3 text-lg md:text-xl text-muted font-light max-w-xl leading-relaxed mb-10">
+      CS undergrad at <strong class="font-medium text-ink">Sathyabama University</strong> — building things
+      for the web, one commit at a time.
+    </p>
+
+    <div class="animate-fade-up delay-4 flex flex-wrap gap-4">
+
+      <a href="#projects"
+         class="px-6 py-3 bg-ink text-paper text-sm font-medium rounded-full hover:bg-accent transition-colors duration-200">
+        See my work
+      </a>
+
+      <!-- ============================================================
+           RESUME BUTTON
+           HOW TO USE:
+             Step 1 — Save your resume as  resume.pdf
+             Step 2 — Put resume.pdf in the SAME folder as index.html
+             Step 3 — The button below will download it automatically
+           If your file has a different name, change "resume.pdf" below
+      ============================================================ -->
+      <a href="resume.pdf" target="_blank"
+         class="px-6 py-3 border border-ink/30 text-sm font-medium rounded-full hover:border-accent hover:text-accent transition-colors duration-200">
+        Download resume ↗
+      </a>
+
+    </div>
+
+    <div class="animate-fade-up delay-5 absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-muted text-xs tracking-widest uppercase">
+      <span>Scroll</span>
+      <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 1v14M1 13l5 5 5-5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </section>
+
+
+  <!-- ===================== ABOUT ===================== -->
+  <section id="about" class="reveal py-24 px-6 max-w-5xl mx-auto">
+    <div class="grid md:grid-cols-[1fr_2fr] gap-16 items-start">
+
+      <!-- Left: photo upload -->
+      <div>
+        <p class="text-xs font-medium tracking-[0.2em] uppercase text-muted mb-6">About me</p>
+
+        <!-- ============================================================
+             PHOTO UPLOAD
+             HOW TO USE (two options):
+
+             OPTION A — Click to upload while viewing in browser:
+               Just open index.html in your browser, click the box,
+               and pick any photo from your computer. It shows instantly.
+               ⚠️  This preview is temporary — it resets on page refresh.
+
+             OPTION B — Permanent photo for GitHub Pages:
+               1. Save your photo as  photo.jpg  (or photo.png)
+               2. Put it in the SAME folder as index.html
+               3. In the <img> tag below, change  src=""  to  src="photo.jpg"
+               4. Remove the word  hidden  from the <img> tag's class
+               5. The photo will now load automatically every time
+        ============================================================ -->
+
+        <!-- Clickable upload area -->
+        <div id="photo-wrapper"
+             class="aspect-[3/4] bg-card rounded-2xl overflow-hidden relative group"
+             onclick="document.getElementById('photo-input').click()">
+
+          <!-- Placeholder shown before photo is picked -->
+          <div id="photo-placeholder"
+               class="absolute inset-0 flex flex-col items-center justify-center text-muted">
+            <svg class="mb-3 opacity-30" width="44" height="44" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="1">
+              <rect x="3" y="3" width="18" height="18" rx="3"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <path d="M21 15l-5-5L5 21"/>
+            </svg>
+            <span class="text-sm font-medium">Click to upload photo</span>
+            <span class="text-xs mt-1 opacity-60">JPG · PNG · WEBP</span>
+          </div>
+
+          <!-- Photo preview (hidden until file is picked) -->
+          <!-- OPTION B: change src="" to src="photo.jpg" and remove "hidden" -->
+          <img id="photo-preview"
+               src=""
+               alt="Profile photo"
+               class="hidden w-full h-full object-cover object-center" />
+
+          <!-- Hover overlay shown after photo is loaded -->
+          <div id="photo-overlay"
+               class="hidden absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-200 flex items-center justify-center">
+            <span class="text-white text-xs font-medium tracking-wide">Click to change photo</span>
+          </div>
+
+        </div>
+
+        <!-- Hidden file input — triggered by clicking the box above -->
+        <input id="photo-input"
+               type="file"
+               accept="image/jpeg,image/png,image/webp"
+               class="hidden" />
+
+        <p class="text-xs text-muted text-center mt-3">Click the box to upload your photo</p>
+      </div>
+
+      <!-- Right: bio -->
+      <div class="pt-10">
+
+        <!-- CHANGE: About headline -->
+        <h2 class="font-serif text-4xl md:text-5xl leading-tight mb-8">
+          I build clean website <br/><em>useful</em> software.
+        </h2>
+
+        <!-- CHANGE: Your bio paragraphs -->
+        <div class="space-y-4 text-base text-muted leading-relaxed max-w-lg">
+          <p>
+            Hi! I'm a <strong class="text-ink font-medium">First-year Computer Science student</strong>
+            at Sathyabama Institute of Science and Technology. I'm interested in full-stack web development, open source, and
+            making technology more accessible.
+          </p>
+          <p>
+            When I'm not coding, I'm probably [your hobby — reading, playing chess, hiking, etc.].
+            I'm currently looking for <strong class="text-ink font-medium">internship opportunities
+            for summer 2026</strong>.
+          </p>
+        </div>
+
+        <!-- Skills chips — edit the array in script.js -->
+        <div id="skills-chips" class="flex flex-wrap gap-2 mt-8"></div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===================== PROJECTS ===================== -->
+  <section id="projects" class="reveal py-24 px-6 bg-ink text-paper">
+    <div class="max-w-5xl mx-auto">
+
+      <div class="flex items-baseline justify-between mb-14">
+        <div>
+          <p class="text-xs font-medium tracking-[0.2em] uppercase text-paper/40 mb-3">Work</p>
+          <h2 class="font-serif text-4xl md:text-5xl">Projects</h2>
+        </div>
+        <!-- CHANGE: Your GitHub URL -->
+        <a href="https://github.com/harshidaa6278" target="_blank"
+           class="text-sm text-paper/50 hover:text-accent transition-colors hidden sm:block">
+          github.com/harshidaa6278 ↗
+        </a>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- PROJECT 1 — CHANGE: title, description, tags, links -->
+        <div class="project-card bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col">
+          <div class="w-10 h-10 rounded-xl bg-accent/20 flex items-center justify-center mb-5">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c84b2f" stroke-width="1.5">
+              <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+            </svg>
+          </div>
+          <h3 class="font-medium text-lg mb-2">Project One</h3>
+          <p class="text-paper/50 text-sm leading-relaxed flex-1 mb-5">
+            A short, punchy description of what this project does and why you built it. Keep it to 2 sentences.
+          </p>
+          <div class="flex flex-wrap gap-2 mb-5">
+            <span class="px-2 py-0.5 text-xs bg-white/10 text-paper/60 rounded-full">React</span>
+            <span class="px-2 py-0.5 text-xs bg-white/10 text-paper/60 rounded-full">Node.js</span>
+            <span class="px-2 py-0.5 text-xs bg-white/10 text-paper/60 rounded-full">MongoDB</span>
+          </div>
+          <div class="flex gap-4 text-sm">
+            <a href="#" class="text-accent hover:underline">Live ↗</a>
+            <a href="#" class="text-paper/40 hover:text-paper transition-colors">GitHub ↗</a>
+          </div>
+        </div>
+
+        <!-- PROJECT 2 — CHANGE: title, description, tags, links -->
+        <div class="project-card bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col">
+          <div class="w-10 h-10 rounded-xl bg-yellow-400/20 flex items-center justify-center mb-5">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ca8a04" stroke-width="1.5">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <h3 class="font-medium text-lg mb-2">Project Two</h3>
+          <p class="text-paper/50 text-sm leading-relaxed flex-1 mb-5">
+            Another thing you built. What problem did it solve? Who uses it? Make it sound interesting.
+          </p>
+          <div class="flex flex-wrap gap-2 mb-5">
+            <span class="px-2 py-0.5 text-xs bg-white/10 text-paper/60 rounded-full">Python</span>
+            <span class="px-2 py-0.5 text-xs bg-white/10 text-paper/60 rounded-full">FastAPI</span>
+            <span class="px-2 py-0.5 text-xs bg-white/10 text-paper/60 rounded-full">PostgreSQL</span>
+          </div>
+          <div class="flex gap-4 text-sm">
+            <a href="#" class="text-accent hover:underline">Live ↗</a>
+            <a href="#" class="text-paper/40 hover:text-paper transition-colors">GitHub ↗</a>
+          </div>
+        </div>
+
+        <!-- PROJECT 3 — CHANGE: title, description, tags, links -->
+        <div class="project-card bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col">
+          <div class="w-10 h-10 rounded-xl bg-teal-400/20 flex items-center justify-center mb-5">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
+            </svg>
+          </div>
+          <h3 class="font-medium text-lg mb-2">Project Three</h3>
+          <p class="text-paper/50 text-sm leading-relaxed flex-1 mb-5">
+            Your third project. This could be a CLI tool, a mobile app, a game, a browser extension — anything you're proud of.
+          </p>
+          <div class="flex flex-wrap gap-2 mb-5">
+            <span class="px-2 py-0.5 text-xs bg-white/10 text-paper/60 rounded-full">TypeScript</span>
+            <span class="px-2 py-0.5 text-xs bg-white/10 text-paper/60 rounded-full">Tailwind</span>
+          </div>
+          <div class="flex gap-4 text-sm">
+            <a href="#" class="text-accent hover:underline">Live ↗</a>
+            <a href="#" class="text-paper/40 hover:text-paper transition-colors">GitHub ↗</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===================== CONTACT ===================== -->
+  <section id="contact" class="reveal py-24 px-6 max-w-5xl mx-auto text-center">
+
+    <p class="text-xs font-medium tracking-[0.2em] uppercase text-muted mb-4">Get in touch</p>
+
+    <!-- CHANGE: Your email — update it in BOTH href and the visible text -->
+    <a href="mailto:you@example.com"
+       class="group inline-block font-serif text-[clamp(2rem,7vw,5rem)] leading-tight tracking-tight hover:text-accent transition-colors duration-300 mb-12">
+      you@example.com
+    </a>
+
+    <p class="text-muted text-base max-w-sm mx-auto leading-relaxed mb-10">
+      Open to internships, collaborations, and interesting conversations.
+      My inbox is always open.
+    </p>
+
+    <!-- CHANGE: Your social profile URLs -->
+    <div class="flex justify-center gap-6 text-sm text-muted">
+      <a href="https://github.com/yourusername"     target="_blank" class="hover:text-accent transition-colors">GitHub ↗</a>
+      <a href="https://linkedin.com/in/yourprofile" target="_blank" class="hover:text-accent transition-colors">LinkedIn ↗</a>
+      <a href="https://twitter.com/yourhandle"      target="_blank" class="hover:text-accent transition-colors">Twitter ↗</a>
+    </div>
+  </section>
+
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="border-t border-ink/10 py-8 px-6 text-center text-xs text-muted">
+    <!-- CHANGE: Your name -->
+    <p>Built by <strong class="text-ink font-medium">Your Name</strong> at the Build a Landing Page workshop · Hosted on GitHub Pages</p>
+  </footer>
+
+
+  <!-- script.js is a SEPARATE file linked below -->
+  <script src="script.js"></script>
+
+  <!-- Photo upload logic — kept here so it works without linking style.css -->
+  <script>
+    const photoInput       = document.getElementById('photo-input');
+    const photoPreview     = document.getElementById('photo-preview');
+    const photoPlaceholder = document.getElementById('photo-placeholder');
+    const photoOverlay     = document.getElementById('photo-overlay');
+
+    photoInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        photoPreview.src = e.target.result;
+        photoPreview.classList.remove('hidden');
+        photoPlaceholder.classList.add('hidden');
+        photoOverlay.classList.remove('hidden');
+      };
+      reader.readAsDataURL(file);
+    });
+  </script>
+
+</body>
+</html>
